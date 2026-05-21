@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Appointments</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Book Appointment</h1>
+
+<input id="patient_id" placeholder="Patient ID">
+
+<input id="doctor_id" placeholder="Doctor ID">
+
+<input id="appointment_date" type="date">
+
+<input id="status" placeholder="Status">
+
+<button onclick="bookAppointment()">
+Book Appointment
+</button>
+
+</div>
+
+<script>
+
+async function bookAppointment(){
+
+const appointment={
+
+patient_id:patient_id.value,
+doctor_id:doctor_id.value,
+appointment_date:appointment_date.value,
+status:status.value
+
+};
+
+await fetch(
+"http://localhost:5000/appointments/add",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(appointment)
+
+}
+);
+
+alert("Appointment Booked");
+
+}
+
+</script>
+
+</body>
+
+</html>

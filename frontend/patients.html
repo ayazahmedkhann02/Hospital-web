@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Patients</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION MENU -->
+  <div class="menu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="patients.html">Patients</a>
+    <a href="doctors.html">Doctors</a>
+    <a href="appointments.html">Appointments</a>
+  </div>
+
+  <!-- FORM CONTAINER -->
+  <div class="container">
+
+    <h1>Patient Registration</h1>
+
+    <input id="name" type="text" placeholder="Patient Name">
+    <input id="age" type="number" placeholder="Age">
+    <input id="gender" type="text" placeholder="Gender">
+    <input id="phone" type="text" placeholder="Phone">
+    <input id="address" type="text" placeholder="Address">
+    <input id="disease" type="text" placeholder="Disease">
+
+    <button onclick="addPatient()">
+      Add Patient
+    </button>
+
+  </div>
+
+  <!-- IMPORTANT: JS FILE -->
+  <script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-name: Hospital CI Pipeline
+name: Hospital Multi-Service CI
 
 on:
   push:
@@ -24,17 +24,37 @@ jobs:
           args: >
             -Dsonar.projectKey=hospital-project
 
-      # 3. Docker Build
-      - name: Build Docker Image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/hospital-app:latest .
-
-      # 4. Docker Login (using PAT)
+      # 3. Login to Docker Hub
       - name: Login to Docker Hub
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # 5. Push Docker Image
-      - name: Push Docker Image
+      # 4. Build Frontend Image
+      - name: Build Frontend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-app:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:latest ./frontend
+
+      # 5. Build Backend Image
+      - name: Build Backend
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/hospital-backend:latest ./backend
+
+      # 6. Build Notification Image
+      - name: Build Notification
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/hospital-notification:latest ./notification
+
+      # 7. Push Frontend
+      - name: Push Frontend
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:latest
+
+      # 8. Push Backend
+      - name: Push Backend
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-backend:latest
+
+      # 9. Push Notification
+      - name: Push Notification
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-notification-service:latest

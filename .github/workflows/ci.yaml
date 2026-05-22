@@ -32,17 +32,17 @@ jobs:
       # 4. Build Frontend Image
       - name: Build Frontend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:latest ./frontend
+          docker build -t ayazahmedkhann02/hospital-frontend:latest ./frontend
 
       # 5. Build Backend Image
       - name: Build Backend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/hospital-backend:latest ./backend
+          docker build -t ayazahmedkhann02/hospital-backend:latest ./backend
 
       # 6. Build Notification Image
       - name: Build Notification
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/hospital-notification:latest ./notification
+          docker build -t ayazahmedkhann02/hospital-notification:latest ./notification
 
       # 7. Push Frontend
       - name: Push Frontend

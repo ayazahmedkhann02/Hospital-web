@@ -1,5 +1,9 @@
 FROM nginx:alpine
 
-COPY . /usr/share/nginx/html
+# Delete default nginx website
+RUN rm -rf /usr/share/nginx/html/*
 
-EXPOSE 80
+# Copy frontend files
+COPY . /usr/share/nginx/html/
+
+CMD ["nginx", "-g", "daemon off;"]

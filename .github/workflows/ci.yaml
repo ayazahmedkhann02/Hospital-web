@@ -57,4 +57,4 @@ jobs:
       # 9. Push Notification
       - name: Push Notification
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-notification-service:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-notification:latest

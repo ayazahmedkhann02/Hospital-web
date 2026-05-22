@@ -42,7 +42,7 @@ jobs:
       # 6. Build Notification Image
       - name: Build Notification
         run: |
-          docker build -t ayazahmedkhann02/hospital-notification:latest ./notification
+          docker build -t ayazahmedkhann02/hospital-notification:latest ./notification-service
 
       # 7. Push Frontend
       - name: Push Frontend

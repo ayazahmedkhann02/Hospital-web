@@ -47,14 +47,14 @@ jobs:
       # 7. Push Frontend
       - name: Push Frontend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:v1
 
       # 8. Push Backend
       - name: Push Backend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-backend:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-backend:v1
 
       # 9. Push Notification
       - name: Push Notification
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-notification:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-notification-service:v1

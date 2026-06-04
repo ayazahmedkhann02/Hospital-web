@@ -14,7 +14,7 @@ async function addPatient() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/patients/add",
+            "/patients/add",
             {
                 method: "POST",
                 headers: {
@@ -55,7 +55,7 @@ async function addDoctor() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/doctors/add",
+            "/doctors/add",
             {
                 method: "POST",
                 headers: {
@@ -96,7 +96,7 @@ async function bookAppointment() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/appointments/add",
+            "/appointments/add",
             {
                 method: "POST",
                 headers: {
@@ -123,7 +123,6 @@ async function bookAppointment() {
 }
 
 
-
 function login() {
 
     const username =
@@ -131,7 +130,6 @@ function login() {
 
     const password =
         document.getElementById("password").value;
-
 
     if (
         username === "admin"

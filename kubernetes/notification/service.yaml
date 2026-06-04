@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hospital-notification-service
+  namespace: hospital-app
+spec:
+  selector:
+    app: hospital-notification
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP

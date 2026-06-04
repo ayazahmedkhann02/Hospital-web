@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-backend
+  namespace: hospital-app
+  labels:
+    app: hospital-backend
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: hospital-backend
+
+  template:
+    metadata:
+      labels:
+        app: hospital-backend
+
+    spec:
+      nodeSelector:
+        role: application
+
+      containers:
+        - name: backend
+          image: ayazahmedkhann02/hospital-backend:initial
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 5000
+
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+          env:
+            - name: DB_HOST
+              value: hospital-db.cpuiqysgmefu.ap-south-2.rds.amazonaws.com
+
+            - name: DB_USER
+              value: admin
+
+            - name: DB_PASSWORD
+              value: hospital123
+
+            - name: DB_NAME
+              value: hospitaldb
+
+            - name: DB_PORT
+              value: "3306"
+
+            - name: PORT
+              value: "5000"

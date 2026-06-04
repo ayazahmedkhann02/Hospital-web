@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-frontend
+  namespace: hospital-app
+  labels:
+    app: hospital-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hospital-frontend
+  template:
+    metadata:
+      labels:
+        app: hospital-frontend
+    spec:
+      nodeSelector:
+        role: application
+      containers:
+      - name: frontend
+        image: ayazahmedkhann02/hospital-frontend:initial
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-notification
+  namespace: hospital-app
+  labels:
+    app: hospital-notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hospital-notification
+  template:
+    metadata:
+      labels:
+        app: hospital-notification
+    spec:
+      nodeSelector:
+        role: application
+      containers:
+      - name: notification
+        image: ayazahmedkhann02/hospital-notification:initial
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"

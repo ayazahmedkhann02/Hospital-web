@@ -30,7 +30,7 @@ jobs:
         run: |
           aws eks update-kubeconfig \
           --region ap-south-2 \
-          --name YOUR_EKS_CLUSTER_NAME
+          --name hospital-eks
 
       - name: Deploy Frontend
         run: |

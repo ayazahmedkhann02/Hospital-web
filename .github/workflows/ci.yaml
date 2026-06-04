@@ -1,4 +1,4 @@
-name: Hospital Multi-Service CI
+name: Hospital CI
 
 on:
   push:
@@ -6,15 +6,15 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-push:
+
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout code
-      - name: Checkout code
+
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. SonarQube Scan
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
@@ -24,37 +24,41 @@ jobs:
           args: >
             -Dsonar.projectKey=hospital-project
 
-      # 3. Login to Docker Hub
-      - name: Login to Docker Hub
+      - name: Docker Login
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login \
+          -u "${{ secrets.DOCKER_USERNAME }}" \
+          --password-stdin
 
-      # 4. Build Frontend Image
       - name: Build Frontend
         run: |
-          docker build -t ayazahmedkhann02/hospital-frontend:v1 ./frontend
+          docker build \
+          -t ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:${{ github.sha }} \
+          ./frontend
 
-      # 5. Build Backend Image
       - name: Build Backend
         run: |
-          docker build -t ayazahmedkhann02/hospital-backend:v1 ./backend
+          docker build \
+          -t ${{ secrets.DOCKER_USERNAME }}/hospital-backend:${{ github.sha }} \
+          ./backend
 
-      # 6. Build Notification Image
       - name: Build Notification
         run: |
-          docker build -t ayazahmedkhann02/hospital-notification:v1 ./notification-service
+          docker build \
+          -t ${{ secrets.DOCKER_USERNAME }}/hospital-notification:${{ github.sha }} \
+          ./notification-service
 
-      # 7. Push Frontend
       - name: Push Frontend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:v1
+          docker push \
+          ${{ secrets.DOCKER_USERNAME }}/hospital-frontend:${{ github.sha }}
 
-      # 8. Push Backend
       - name: Push Backend
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-backend:v1
+          docker push \
+          ${{ secrets.DOCKER_USERNAME }}/hospital-backend:${{ github.sha }}
 
-      # 9. Push Notification
       - name: Push Notification
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/hospital-notification:v1
+          docker push \
+          ${{ secrets.DOCKER_USERNAME }}/hospital-notification:${{ github.sha }}
